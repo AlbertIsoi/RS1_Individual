@@ -1,11 +1,27 @@
-pavel@debian:~$ nmap -p 502 192.168.88.66
-Starting Nmap 7.93 ( https://nmap.org ) at 2025-07-28 15:55 +05
-Nmap scan report for 192.168.88.66
-Host is up (0.00030s latency).
+pavel@debian:~$ mbpoll -m tcp -a 0 -r 1 -c 1 192.168.88.66
+mbpoll 1.0-0 - FieldTalk(tm) Modbus(R) Master Simulator
+Copyright © 2015-2019 Pascal JEAN, https://github.com/epsilonrt/mbpoll
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it
+under certain conditions; type 'mbpoll -w' for details.
 
-PORT    STATE SERVICE
-502/tcp open  mbap
+Protocol configuration: Modbus TCP
+Slave configuration...: address = [0]
+                        start reference = 1, count = 1
+Communication.........: 192.168.88.66, port 502, t/o 1.00 s, poll rate 1000 ms
+Data type.............: 16-bit register, output (holding) register table
 
-Nmap done: 1 IP address (1 host up) scanned in 0.05 seconds
+-- Polling slave 0... Ctrl-C to stop)
+Read output (holding) register failed: Connection timed out
+-- Polling slave 0... Ctrl-C to stop)
+Read output (holding) register failed: Connection timed out
+-- Polling slave 0... Ctrl-C to stop)
+^C--- 192.168.88.66 poll statistics ---
+3 frames transmitted, 0 received, 2 errors, 100.0% frame loss
+
+everything was closed.
+Have a nice day !
+pavel@debian:~$ mbpoll -m tcp -a 0 -r 0 -c 10 192.168.88.66
+mbpoll: start reference out of range (0) ! Try -h for help.
 pavel@debian:~$ 
 
