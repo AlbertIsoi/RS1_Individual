@@ -1,4 +1,13 @@
-pavel@debian:~$ mbpoll -m tcp -a 0 -r 1 -c 1 192.168.88.66
+pavel@debian:~$ sudo apt install mbpoll
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Уже установлен пакет mbpoll самой новой версии (1.4.11+dfsg-2).
+Следующие пакеты устанавливались автоматически и больше не требуются:
+  linux-image-6.1.0-25-amd64 linux-image-6.1.0-27-amd64
+Для их удаления используйте «sudo apt autoremove».
+Обновлено 0 пакетов, установлено 0 новых пакетов, для удаления отмечено 0 пакетов, и 3 пакетов не обновлено.
+pavel@debian:~$ mbpoll -m tcp -a 0 -r 1 -c 5 192.168.88.66
 mbpoll 1.0-0 - FieldTalk(tm) Modbus(R) Master Simulator
 Copyright © 2015-2019 Pascal JEAN, https://github.com/epsilonrt/mbpoll
 This program comes with ABSOLUTELY NO WARRANTY.
@@ -7,7 +16,7 @@ under certain conditions; type 'mbpoll -w' for details.
 
 Protocol configuration: Modbus TCP
 Slave configuration...: address = [0]
-                        start reference = 1, count = 1
+                        start reference = 1, count = 5
 Communication.........: 192.168.88.66, port 502, t/o 1.00 s, poll rate 1000 ms
 Data type.............: 16-bit register, output (holding) register table
 
@@ -20,8 +29,3 @@ Read output (holding) register failed: Connection timed out
 3 frames transmitted, 0 received, 2 errors, 100.0% frame loss
 
 everything was closed.
-Have a nice day !
-pavel@debian:~$ mbpoll -m tcp -a 0 -r 0 -c 10 192.168.88.66
-mbpoll: start reference out of range (0) ! Try -h for help.
-pavel@debian:~$ 
-
