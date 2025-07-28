@@ -1,0 +1,22 @@
+pavel@debian:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: enp2s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 40:8d:5c:d0:98:01 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.88.100/24 scope global enp2s0
+       valid_lft forever preferred_lft forever
+7: enxc84d4429a8a0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether c8:4d:44:29:a8:a0 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.88.35/24 brd 192.168.88.255 scope global dynamic noprefixroute enxc84d4429a8a0
+       valid_lft 516sec preferred_lft 516sec
+    inet6 fe80::ce2a:a91:c922:9296/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+9: wlx0857003e7951: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN group default qlen 1000
+    link/ether 16:aa:0e:48:2c:5a brd ff:ff:ff:ff:ff:ff permaddr 08:57:00:3e:79:51
+pavel@debian:~$ ^C
+pavel@debian:~$ 
+
