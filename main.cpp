@@ -46,4 +46,3 @@ Starting Nmap 7.93 ( https://nmap.org ) at 2025-07-30 11:17 +05
 Note: Host seems down. If it is really up, but blocking our ping probes, try -Pn
 Nmap done: 1 IP address (0 hosts up) scanned in 1.49 seconds
 pavel@debian:~$ 
-
