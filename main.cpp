@@ -1,78 +1,53 @@
+pavel@debian:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: enp2s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 40:8d:5c:d0:98:01 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.88.66/24 brd 192.168.88.255 scope global dynamic noprefixroute enp2s0
+       valid_lft 415sec preferred_lft 415sec
+    inet 192.168.88.100/24 scope global secondary enp2s0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::489:7676:bf3c:a7c3/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: wlx0857003e7951: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN group default qlen 1000
+    link/ether f2:21:82:f1:c5:b1 brd ff:ff:ff:ff:ff:ff permaddr 08:57:00:3e:79:51
+4: enxc84d4429a8a0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc fq_codel state DOWN group default qlen 1000
+    link/ether c8:4d:44:29:a8:a0 brd ff:ff:ff:ff:ff:ff
+pavel@debian:~$ ip a | grep 192.168.88
+    inet 192.168.88.66/24 brd 192.168.88.255 scope global dynamic noprefixroute enp2s0
+    inet 192.168.88.100/24 scope global secondary enp2s0
+pavel@debian:~$ arp -a
+bash: arp: команда не найдена
+pavel@debian:~$ ip route
+default via 192.168.88.1 dev enp2s0 proto dhcp src 192.168.88.66 metric 100 
+192.168.88.0/24 dev enp2s0 proto kernel scope link src 192.168.88.66 metric 100 
 pavel@debian:~$ ping 192.168.88.66
 PING 192.168.88.66 (192.168.88.66) 56(84) bytes of data.
-64 bytes from 192.168.88.66: icmp_seq=1 ttl=64 time=0.018 ms
-64 bytes from 192.168.88.66: icmp_seq=2 ttl=64 time=0.020 ms
+64 bytes from 192.168.88.66: icmp_seq=1 ttl=64 time=0.020 ms
+64 bytes from 192.168.88.66: icmp_seq=2 ttl=64 time=0.021 ms
 64 bytes from 192.168.88.66: icmp_seq=3 ttl=64 time=0.024 ms
-64 bytes from 192.168.88.66: icmp_seq=4 ttl=64 time=0.030 ms
-64 bytes from 192.168.88.66: icmp_seq=5 ttl=64 time=0.039 ms
-64 bytes from 192.168.88.66: icmp_seq=6 ttl=64 time=0.045 ms
-64 bytes from 192.168.88.66: icmp_seq=7 ttl=64 time=0.042 ms
-64 bytes from 192.168.88.66: icmp_seq=8 ttl=64 time=0.044 ms
-64 bytes from 192.168.88.66: icmp_seq=9 ttl=64 time=0.043 ms
-64 bytes from 192.168.88.66: icmp_seq=10 ttl=64 time=0.044 ms
-64 bytes from 192.168.88.66: icmp_seq=11 ttl=64 time=0.047 ms
-64 bytes from 192.168.88.66: icmp_seq=12 ttl=64 time=0.045 ms
-64 bytes from 192.168.88.66: icmp_seq=13 ttl=64 time=0.044 ms
-64 bytes from 192.168.88.66: icmp_seq=14 ttl=64 time=0.047 ms
-64 bytes from 192.168.88.66: icmp_seq=15 ttl=64 time=0.046 ms
-64 bytes from 192.168.88.66: icmp_seq=16 ttl=64 time=0.045 ms
-64 bytes from 192.168.88.66: icmp_seq=17 ttl=64 time=0.044 ms
-64 bytes from 192.168.88.66: icmp_seq=18 ttl=64 time=0.042 ms
-64 bytes from 192.168.88.66: icmp_seq=19 ttl=64 time=0.034 ms
-64 bytes from 192.168.88.66: icmp_seq=20 ttl=64 time=0.048 ms
-64 bytes from 192.168.88.66: icmp_seq=21 ttl=64 time=0.049 ms
-64 bytes from 192.168.88.66: icmp_seq=22 ttl=64 time=0.045 ms
-64 bytes from 192.168.88.66: icmp_seq=23 ttl=64 time=0.044 ms
-64 bytes from 192.168.88.66: icmp_seq=24 ttl=64 time=0.045 ms
-64 bytes from 192.168.88.66: icmp_seq=25 ttl=64 time=0.044 ms
-64 bytes from 192.168.88.66: icmp_seq=26 ttl=64 time=0.047 ms
-64 bytes from 192.168.88.66: icmp_seq=27 ttl=64 time=0.045 ms
-64 bytes from 192.168.88.66: icmp_seq=28 ttl=64 time=0.049 ms
-64 bytes from 192.168.88.66: icmp_seq=29 ttl=64 time=0.048 ms
-64 bytes from 192.168.88.66: icmp_seq=30 ttl=64 time=0.040 ms
-64 bytes from 192.168.88.66: icmp_seq=31 ttl=64 time=0.045 ms
-64 bytes from 192.168.88.66: icmp_seq=32 ttl=64 time=0.044 ms
-64 bytes from 192.168.88.66: icmp_seq=33 ttl=64 time=0.043 ms
-64 bytes from 192.168.88.66: icmp_seq=34 ttl=64 time=0.046 ms
-64 bytes from 192.168.88.66: icmp_seq=35 ttl=64 time=0.046 ms
-64 bytes from 192.168.88.66: icmp_seq=36 ttl=64 time=0.049 ms
-64 bytes from 192.168.88.66: icmp_seq=37 ttl=64 time=0.046 ms
-64 bytes from 192.168.88.66: icmp_seq=38 ttl=64 time=0.044 ms
-64 bytes from 192.168.88.66: icmp_seq=39 ttl=64 time=0.049 ms
-64 bytes from 192.168.88.66: icmp_seq=40 ttl=64 time=0.044 ms
-64 bytes from 192.168.88.66: icmp_seq=41 ttl=64 time=0.046 ms
-64 bytes from 192.168.88.66: icmp_seq=42 ttl=64 time=0.044 ms
-64 bytes from 192.168.88.66: icmp_seq=43 ttl=64 time=0.044 ms
-64 bytes from 192.168.88.66: icmp_seq=44 ttl=64 time=0.046 ms
+64 bytes from 192.168.88.66: icmp_seq=4 ttl=64 time=0.033 ms
 ^C
 --- 192.168.88.66 ping statistics ---
-44 packets transmitted, 44 received, 0% packet loss, time 44021ms
-rtt min/avg/max/mdev = 0.018/0.042/0.049/0.007 ms
+4 packets transmitted, 4 received, 0% packet loss, time 3059ms
+rtt min/avg/max/mdev = 0.020/0.024/0.033/0.005 ms
+pavel@debian:~$ sudo ip neigh flush all
+pavel@debian:~$ sudo ip route flush cache
 pavel@debian:~$ ping 192.168.88.66
 PING 192.168.88.66 (192.168.88.66) 56(84) bytes of data.
-64 bytes from 192.168.88.66: icmp_seq=1 ttl=64 time=0.019 ms
-64 bytes from 192.168.88.66: icmp_seq=2 ttl=64 time=0.020 ms
-64 bytes from 192.168.88.66: icmp_seq=3 ttl=64 time=0.025 ms
-64 bytes from 192.168.88.66: icmp_seq=4 ttl=64 time=0.032 ms
-64 bytes from 192.168.88.66: icmp_seq=5 ttl=64 time=0.041 ms
-64 bytes from 192.168.88.66: icmp_seq=6 ttl=64 time=0.044 ms
-64 bytes from 192.168.88.66: icmp_seq=7 ttl=64 time=0.049 ms
-64 bytes from 192.168.88.66: icmp_seq=8 ttl=64 time=0.047 ms
-64 bytes from 192.168.88.66: icmp_seq=9 ttl=64 time=0.049 ms
-64 bytes from 192.168.88.66: icmp_seq=10 ttl=64 time=0.060 ms
-64 bytes from 192.168.88.66: icmp_seq=11 ttl=64 time=0.030 ms
-64 bytes from 192.168.88.66: icmp_seq=12 ttl=64 time=0.165 ms
-64 bytes from 192.168.88.66: icmp_seq=13 ttl=64 time=0.056 ms
-64 bytes from 192.168.88.66: icmp_seq=14 ttl=64 time=0.047 ms
-64 bytes from 192.168.88.66: icmp_seq=15 ttl=64 time=0.079 ms
-64 bytes from 192.168.88.66: icmp_seq=16 ttl=64 time=0.038 ms
-64 bytes from 192.168.88.66: icmp_seq=17 ttl=64 time=0.056 ms
-64 bytes from 192.168.88.66: icmp_seq=18 ttl=64 time=0.048 ms
-64 bytes from 192.168.88.66: icmp_seq=19 ttl=64 time=0.046 ms
-64 bytes from 192.168.88.66: icmp_seq=20 ttl=64 time=0.049 ms
-64 bytes from 192.168.88.66: icmp_seq=21 ttl=64 time=0.048 ms
-64 bytes from 192.168.88.66: icmp_seq=22 ttl=64 time=0.049 ms
+64 bytes from 192.168.88.66: icmp_seq=1 ttl=64 time=0.021 ms
+64 bytes from 192.168.88.66: icmp_seq=2 ttl=64 time=0.021 ms
+64 bytes from 192.168.88.66: icmp_seq=3 ttl=64 time=0.023 ms
+64 bytes from 192.168.88.66: icmp_seq=4 ttl=64 time=0.033 ms
+64 bytes from 192.168.88.66: icmp_seq=5 ttl=64 time=0.045 ms
+64 bytes from 192.168.88.66: icmp_seq=6 ttl=64 time=0.047 ms
 ^C
 --- 192.168.88.66 ping statistics ---
-22 packets transmitted, 22 received, 0% packet loss, time 21485ms
-rtt min/avg/max/mdev = 0.019/0.049/0.165/0.028 ms
+6 packets transmitted, 6 received, 0% packet loss, time 5123ms
+rtt min/avg/max/mdev = 0.021/0.031/0.047/0.010 ms
+pavel@debian:~$ 
+
