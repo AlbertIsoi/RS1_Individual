@@ -1,62 +1,27 @@
-#include <iostream>
-#include <modbus/modbus.h>
-#include <unistd.h>
+pavel@debian:~$ sudo ip addr add 192.168.88.100/24 dev eth0
+[sudo] пароль для pavel: 
+Cannot find device "eth0"
+pavel@debian:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: enp2s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 40:8d:5c:d0:98:01 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.88.66/24 brd 192.168.88.255 scope global dynamic noprefixroute enp2s0
+       valid_lft 345sec preferred_lft 345sec
+    inet 192.168.88.100/24 scope global secondary enp2s0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::489:7676:bf3c:a7c3/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: wlx0857003e7951: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN group default qlen 1000
+    link/ether f2:44:f1:bd:92:c4 brd ff:ff:ff:ff:ff:ff permaddr 08:57:00:3e:79:51
+4: enxc84d4429a8a0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether c8:4d:44:29:a8:a0 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::ce2a:a91:c922:9296/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+pavel@debian:~$ 
 
-int main() {
-    const char* ROBOT_IP = "192.168.88.66";
-    const int ROBOT_PORT = 9760;
-
-    // 1. Create Modbus TCP context
-    modbus_t* ctx = modbus_new_tcp(ROBOT_IP, ROBOT_PORT);
-    if (ctx == NULL) {
-        std::cerr << "❌ Unable to create Modbus context" << std::endl;
-        return -1;
-    }
-
-    // 2. Connect to the robot
-    if (modbus_connect(ctx) == -1) {
-        std::cerr << "❌ Connection failed: " << modbus_strerror(errno) << std::endl;
-        modbus_free(ctx);
-        return -1;
-    }
-    std::cout << "✅ Connected to robot at " << ROBOT_IP << std::endl;
-
-    // 3. Get joint positions from user
-    uint16_t joints[6];
-    std::cout << "Enter joint angles (J1–J6 in robot units):\n";
-    for (int i = 0; i < 6; ++i) {
-        std::cout << "J" << (i + 1) << ": ";
-        std::cin >> joints[i];
-    }
-
-    // 4. Write joint angles to holding registers 600–605
-    int rc = modbus_write_registers(ctx, 600, 6, joints);
-    if (rc == -1) {
-        std::cerr << "❌ Failed to write joint positions: " << modbus_strerror(errno) << std::endl;
-        modbus_close(ctx);
-        modbus_free(ctx);
-        return -1;
-    }
-    std::cout << "✅ Joint positions sent." << std::endl;
-
-    // 5. Set motion mode (902 = 0)
-    uint16_t mode = 0;
-    modbus_write_register(ctx, 902, mode);
-
-    // 6. Set speed percent (903 = 50)
-    uint16_t speed = 50;
-    modbus_write_register(ctx, 903, speed);
-
-    // 7. Trigger movement (901 = 1 then 0)
-    modbus_write_register(ctx, 901, 1);
-    sleep(1);
-    modbus_write_register(ctx, 901, 0);
-
-    std::cout << "🚀 Robot movement triggered." << std::endl;
-
-    // 8. Clean up
-    modbus_close(ctx);
-    modbus_free(ctx);
-    return 0;
-}
 
